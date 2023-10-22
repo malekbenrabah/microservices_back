@@ -32,6 +32,7 @@ public class ProductService implements  IProductService{
 
     @Override
     public ProductDTO createProduct(ProductDTO productDTO, MultipartFile[] photos) throws IOException {
+        //aaaaa
         Product product = ProductDTO.fromDTOtoEntity(productDTO);
         product.setCreated_at(LocalDateTime.now());
         List<String> photosPaths=storeImage(photos);
