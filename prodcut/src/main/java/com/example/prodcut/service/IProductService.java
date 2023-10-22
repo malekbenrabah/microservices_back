@@ -21,5 +21,10 @@ public interface IProductService {
 
     public ProductDTO updateProduct(ProductDTO productDTO);
 
+    public ProductDTO addPhoto(Long productId, MultipartFile[] newPhotos);
+
+    public ProductDTO deletePhotosFromProduct(Long productId, List<String> photoPaths);
+
+
     public void deleteProduct(Long id);
 }
