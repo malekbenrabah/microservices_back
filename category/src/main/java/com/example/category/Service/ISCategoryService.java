@@ -13,5 +13,6 @@ public interface ISCategoryService {
     void deleteCategory(Long id);
     SCategory updateSubCategory(Long id,String category);
     void deleteSubCategory(Long id);
+     List<Category> searchCategories(String name);
 
 }

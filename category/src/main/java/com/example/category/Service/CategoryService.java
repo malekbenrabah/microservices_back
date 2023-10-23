@@ -4,11 +4,14 @@ import com.example.category.entity.Category;
 import com.example.category.entity.CategoryRepository;
 import com.example.category.entity.SCategory;
 import com.example.category.entity.SCategoryRepository;
+import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryService implements ISCategoryService{
@@ -79,6 +82,21 @@ public class CategoryService implements ISCategoryService{
     @Override
     public void deleteSubCategory(Long id) {
       sCategoryRepository.deleteById(id);
+    }
+    @Override
+    public List<Category> searchCategories(String name) {
+
+        List<Category> products = categoryRepository.findAll((Specification<Category>) (root, cq, cb) -> {
+            Predicate p = cb.conjunction();
+            if (name != null) {
+                p = cb.and(p, cb.like(root.get("name"), "%" + name + "%"));
+            }
+
+            return p;
+        });
+
+
+        return products;
     }
 
 

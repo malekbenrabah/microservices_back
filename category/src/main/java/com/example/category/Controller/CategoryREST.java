@@ -64,6 +64,11 @@ public class CategoryREST {
     public void deletesubcat(@PathVariable Long id ){
         categoryService.deleteSubCategory(id);
     }
+    @GetMapping("/search/{name}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<Category> searchCategory(@PathVariable String name){
+        return categoryService.searchCategories(name);
+    }
 
 
 }
