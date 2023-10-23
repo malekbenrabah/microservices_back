@@ -1,6 +1,5 @@
 package com.example.gateway.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -25,5 +24,6 @@ public class SecurityConfig {
         return serverHttpSecurity.build();
 
     }
+
 
 }

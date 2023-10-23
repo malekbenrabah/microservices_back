@@ -1,0 +1,6 @@
+
+x
+java:S1488 "bImmediately return this expression instead of assigning it to the temporary variable "productDTO".(É½ËÙ
+z
+java:S1488/"_Immediately return this expression instead of assigning it to the temporary variable "product".(ì“¢–þÿÿÿÿ
+j	java:S116"URename this field "created_at" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(† ¬Ì

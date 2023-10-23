@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 @RestController
+@CrossOrigin(origins = "**")
 @RequestMapping("/api/category")
 public class CategoryREST {
     @Autowired
@@ -38,7 +39,7 @@ public class CategoryREST {
         return categoryService.addSubCategory(id,name);
     }
     @GetMapping("/getscat/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public List<SCategory> findSubCategorybyCategory(@PathVariable Long id){
         return categoryService.getSubCategoriesByCategory(id);
     }

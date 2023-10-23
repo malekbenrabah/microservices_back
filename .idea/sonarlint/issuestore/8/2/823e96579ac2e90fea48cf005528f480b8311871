@@ -1,0 +1,33 @@
+
+X
+java:S4973—"<Strings and Boxed types should be compared using "equals()".(žà¼›úÿÿÿÿ
+l
+java:S3655¢"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ã´›‹ûÿÿÿÿ
+f
+java:S3655”"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(Ââ2
+f
+java:S3655®"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(Ââ2
+«
+java:S44491"Annotate the parameter with @javax.annotation.Nullable in method 'cleanPath' declaration, or make sure that null can not be passed as argument.(õœ¼·ýÿÿÿÿ
+Q	java:S1255"<This block of commented-out lines of code should be removed.(š¸†»
+E	java:S106U"+Replace this use of System.out by a logger.(ÛÛ§¿úÿÿÿÿ
+h
+java:S6204`"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹
+K
+java:S2209_"5Change this instance-reference to a static reference.(™œÌÊ
+i
+java:S6204Ž"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹
+L
+java:S2209"5Change this instance-reference to a static reference.(™œÌÊ
+i
+java:S6204"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹
+L
+java:S2209œ"5Change this instance-reference to a static reference.(çÃÞ
+L
+java:S2209©"5Change this instance-reference to a static reference.(íïþ
+Z
+java:S1128"DRemove this unused import 'jakarta.persistence.criteria.Expression'.(ÿüþ¢
+T
+java:S1128">Remove this unused import 'jakarta.persistence.criteria.Join'.(™ê¨‘
+X
+java:S1128"BRemove this unused import 'jakarta.persistence.criteria.JoinType'.(¯ù½é

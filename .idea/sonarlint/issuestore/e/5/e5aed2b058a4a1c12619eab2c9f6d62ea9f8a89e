@@ -1,0 +1,10 @@
+
+}
+java:S1488Y"`Immediately return this expression instead of assigning it to the temporary variable "products".(Åßò 8‹ùĞµ1
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(·˜ôœ8×„âĞµ1
+r
+java:S3655L"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(“¶ÀĞøÿÿÿÿ8á„âĞµ1
+m
+java:S36558"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(·ÂŞ¡8á„âĞµ1
+m
+java:S3655"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(·ÂŞ¡8à„âĞµ1
