@@ -1,7 +1,9 @@
 package com.example.prodcut.service;
 
 import com.example.prodcut.dto.ProductDTO;
+import com.example.prodcut.entity.Photo;
 import com.example.prodcut.entity.Product;
+import com.example.prodcut.repository.IPhotoRepository;
 import com.example.prodcut.repository.ProductRepository;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Join;
@@ -30,14 +32,39 @@ public class ProductService implements  IProductService{
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    IPhotoRepository photoRepository;
+
     @Override
     public ProductDTO createProduct(ProductDTO productDTO, MultipartFile[] photos) throws IOException {
-        //aaaaa
+
         Product product = ProductDTO.fromDTOtoEntity(productDTO);
         product.setCreated_at(LocalDateTime.now());
+        /*
         List<String> photosPaths=storeImage(photos);
         product.setPhoto(photosPaths);
+
+         */
+
+        List<Photo> photoEntities = new ArrayList<>();
+        if (photos != null && photos.length > 0) {
+            List<String> photosPaths = storeImage(photos);
+            for (String path : photosPaths) {
+                Photo photo = new Photo();
+                photo.setPath(path);
+                photoEntities.add(photo);
+            }
+        }
+
+        product.setPhotos(photoEntities);
+
         Product savedProduct = productRepository.save(product);
+
+        for (Photo photo : photoEntities) {
+            photo.setProduct(savedProduct);
+            photoRepository.save(photo);
+        }
+
         return ProductDTO.fromEntityToDTO(savedProduct);
 
     }
@@ -105,7 +132,7 @@ public class ProductService implements  IProductService{
 
     @Override
     public List<ProductDTO> searchProducts(String name, String description, String brand, Float maxPrice, Float minPrice) {
-
+        System.out.println("begin search");
         List<Product> products = productRepository.findAll((Specification<Product>) (root, cq, cb) -> {
             Predicate p = cb.conjunction();
             if (name != null) {
@@ -167,6 +194,49 @@ public class ProductService implements  IProductService{
         product.setBrand(productDTO.getBrand());
         productRepository.save(product);
         return productDTO.fromEntityToDTO(product);
+    }
+
+    @Override
+    public ProductDTO addPhoto(Long productId, MultipartFile[] newPhotos) throws IOException {
+        Product product = productRepository.findById(productId).orElse(null);
+
+        List<String> newPhotoPaths = storeImage(newPhotos);
+
+        List<Photo> existingPhotos = product.getPhotos();
+        for (String path : newPhotoPaths) {
+            Photo photo = new Photo();
+            photo.setPath(path);
+            photo.setProduct(product);
+            existingPhotos.add(photo);
+            photoRepository.save(photo);
+        }
+
+        product.setPhotos(existingPhotos);
+        Product updatedProduct = productRepository.save(product);
+        return ProductDTO.fromEntityToDTO(updatedProduct);
+
+    }
+
+    @Override
+    public ProductDTO deletePhoto(Long productId, Long photoId) {
+        Product product = productRepository.findById(productId).orElse(null);
+
+        List<Photo> existingPhotos = product.getPhotos();
+
+        Photo photoToDelete = existingPhotos.stream()
+                .filter(photo -> photo.getId().equals(photoId))
+                .findFirst()
+                .orElse(null);
+
+            existingPhotos.remove(photoToDelete);
+            // Delete the photo entity from the database
+            photoRepository.delete(photoToDelete);
+            product.setPhotos(existingPhotos);
+            productRepository.save(product);
+            return ProductDTO.fromEntityToDTO(product);
+
+
+
     }
 
     @Override

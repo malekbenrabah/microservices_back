@@ -1,10 +1,12 @@
 package com.example.prodcut.dto;
 
+import com.example.prodcut.entity.Photo;
 import com.example.prodcut.entity.Product;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @ToString
@@ -25,9 +27,11 @@ public class ProductDTO {
 
     private LocalDateTime created_at;
 
-    private List<String> photo;
+    private List<Photo> photos;
 
     public static ProductDTO fromEntityToDTO(Product product){
+
+
 
         ProductDTO productDTO = ProductDTO.builder()
                 .id(product.getId())
@@ -36,7 +40,7 @@ public class ProductDTO {
                 .price(product.getPrice())
                 .brand(product.getBrand())
                 .created_at(product.getCreated_at())
-                .photo(product.getPhoto())
+                .photos(product.getPhotos())
                 .build();
 
         return productDTO;
@@ -51,7 +55,7 @@ public class ProductDTO {
                 .price(productDTO.getPrice())
                 .brand(productDTO.getBrand())
                 .created_at(productDTO.getCreated_at())
-                .photo(productDTO.getPhoto())
+                .photos(productDTO.getPhotos())
                 .build();
         return product;
 

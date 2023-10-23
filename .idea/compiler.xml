@@ -14,6 +14,7 @@
         <module name="discovery" />
         <module name="prodcut" />
         <module name="category" />
+        <module name="brand" />
         <module name="gateway" />
         <module name="cart" />
       </profile>
@@ -21,6 +22,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="brand" options="-parameters" />
       <module name="cart" options="-parameters" />
       <module name="category" options="-parameters" />
       <module name="config-server" options="-parameters" />

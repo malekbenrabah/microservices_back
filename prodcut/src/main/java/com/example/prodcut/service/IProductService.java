@@ -21,9 +21,9 @@ public interface IProductService {
 
     public ProductDTO updateProduct(ProductDTO productDTO);
 
-    public ProductDTO addPhoto(Long productId, MultipartFile[] newPhotos);
+    public ProductDTO addPhoto(Long productId, MultipartFile[] newPhotos) throws IOException;
 
-    public ProductDTO deletePhotosFromProduct(Long productId, List<String> photoPaths);
+    public ProductDTO deletePhoto(Long productId, Long photoId);
 
 
     public void deleteProduct(Long id);

@@ -64,6 +64,19 @@ public class ProductController {
         return  productService.updateProduct(productDTO);
     }
 
+    @PutMapping("/updatePhoto")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductDTO addPhoto( @RequestParam("id") Long productId, @RequestParam(value="photo",required = false) MultipartFile[] newPhotos) throws IOException {
+        return productService.addPhoto(productId, newPhotos);
+    }
+
+    @DeleteMapping("/deletePhoto")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductDTO deletePhoto( @RequestParam("productId") Long productId, @RequestParam("photoId")  Long photoId) {
+        return productService.deletePhoto(productId,photoId);
+    }
+
+
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
     public void deleteProduct(@RequestParam("id") Long id){

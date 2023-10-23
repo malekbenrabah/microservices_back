@@ -32,9 +32,15 @@ public class Product {
 
     private LocalDateTime created_at;
 
+
+    /*
     @Column
     @ElementCollection
     private List<String> photo=new ArrayList<>();
+    */
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "product")
+    private List<Photo> photos = new ArrayList<>();
 
     private  Long idCategory;
 
