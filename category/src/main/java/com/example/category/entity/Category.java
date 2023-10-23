@@ -1,13 +1,10 @@
 package com.example.category.entity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import java.util.*;
 
 @Entity
 @Data
@@ -20,7 +17,15 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+@Column(unique = true )
     private String name;
 
+   // @OneToMany(fetch = FetchType.EAGER,mappedBy = "category")
+    //private List<SCategory> scategories;
 
+
+
+    public Category(String name) {
+        this.name = name;
+    }
 }

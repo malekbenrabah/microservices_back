@@ -1,4 +1,12 @@
 package com.example.category.entity;
 
-public interface SCategoryRepository extends org.springframework.data.jpa.repository.JpaRepository<com.example.category.entity.SCategory, java.lang.Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface SCategoryRepository extends JpaRepository<SCategory, Long> {
+    List<SCategory> findByCategory_Id(Long id);
+
+    Optional<SCategory> findById(Long id);
 }
