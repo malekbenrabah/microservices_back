@@ -16,7 +16,7 @@ public class SecurityConfig {
         serverHttpSecurity
                 .csrf().disable()
                 .authorizeExchange(exchange ->
-                    exchange.pathMatchers("/api/v1/students/testStusent","/api/products/getProducts", "/api/products/findById", "/api/products/search", "/api/products/similarProducts")
+                    exchange.pathMatchers("/api/v1/students/testStusent","/api/products/getProducts", "/api/products/findById", "/api/products/search", "/api/products/similarProducts","/api/brands/getBrands","/api/brands/findById")
                             .permitAll()
                             .anyExchange()
                             .authenticated())

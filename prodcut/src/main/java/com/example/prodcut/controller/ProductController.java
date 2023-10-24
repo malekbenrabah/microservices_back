@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
+@CrossOrigin(origins ="http://localhost:4200")
 public class ProductController {
 
     @Autowired
@@ -30,22 +31,19 @@ public class ProductController {
     }
 
     @GetMapping("/getProducts")
-    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> getAllProducts() {
         return  productService.getAllProducts();
     }
 
     @GetMapping("/findById")
-    @ResponseStatus(HttpStatus.FOUND)
     public ProductDTO findProductById(@RequestParam("id") Long id) {
         return productService.findProductById(id);
     }
 
     @GetMapping("/search")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<ProductDTO> searchProducts(@RequestParam(value="title",required = false) String name,
+    public List<ProductDTO> searchProducts(@RequestParam(value="name",required = false) String name,
                                            @RequestParam(value="description",required = false) String description,
-                                           @RequestParam(value="brand",required = false) String brand,
+                                           @RequestParam(value="brand",required = false) Long brand,
                                            @RequestParam(value="maxPrice",required = false) Float maxPrice,
                                            @RequestParam(value="minPrice",required = false) Float minPrice) {
         return productService.searchProducts(name,description,brand,maxPrice, minPrice);
@@ -53,36 +51,39 @@ public class ProductController {
 
 
     @GetMapping("/similarProducts")
-    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> similarProducts(@RequestParam("id") Long id){
         return productService.similarProducts(id);
     }
 
     @PutMapping("/update")
-    @ResponseStatus(HttpStatus.OK)
     public ProductDTO updateProduct(@RequestBody ProductDTO productDTO)  {
         return  productService.updateProduct(productDTO);
     }
 
     @PutMapping("/updatePhoto")
-    @ResponseStatus(HttpStatus.OK)
     public ProductDTO addPhoto( @RequestParam("id") Long productId, @RequestParam(value="photo",required = false) MultipartFile[] newPhotos) throws IOException {
         return productService.addPhoto(productId, newPhotos);
     }
 
     @DeleteMapping("/deletePhoto")
-    @ResponseStatus(HttpStatus.OK)
     public ProductDTO deletePhoto( @RequestParam("productId") Long productId, @RequestParam("photoId")  Long photoId) {
         return productService.deletePhoto(productId,photoId);
     }
 
 
     @DeleteMapping("/delete")
-    @ResponseStatus(HttpStatus.OK)
     public void deleteProduct(@RequestParam("id") Long id){
         productService.deleteProduct(id);
     }
 
+    @GetMapping("/findByBrand/{brand-id}")
+    public List<Product> findAllProductsByBrand(@PathVariable("brand-id")Long id){
+        return productService.findAllProductsByBrand(id);
+    }
 
+    @GetMapping("/getProdByMonth")
+    public List<Object[]> getProductsByMonth() {
+        return productService.getProductsByMonth();
+    }
 
 }

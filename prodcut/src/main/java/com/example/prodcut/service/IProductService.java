@@ -15,7 +15,7 @@ public interface IProductService {
 
     public ProductDTO findProductById(Long id);
 
-    public List<ProductDTO> searchProducts(String name, String description, String brand, Float maxPrice, Float minPrice);
+    public List<ProductDTO> searchProducts(String name, String description, Long brand, Float maxPrice, Float minPrice);
 
     public List<ProductDTO> similarProducts(Long id);
 
@@ -27,4 +27,8 @@ public interface IProductService {
 
 
     public void deleteProduct(Long id);
+
+    public List<Product> findAllProductsByBrand(Long id);
+
+    public List<Object[]>getProductsByMonth();
 }

@@ -16,4 +16,12 @@ public interface ProductRepository extends JpaRepository<Product , Long> {
     public List<Product> findProductsLatest();
 
     List<Product> findAll(Specification<Product> spec);
+
+    List<Product> findAllByBrandId(Long id);
+
+    @Query("select MONTH(p.created_at) as month, count(p.id) from Product p group by month")
+    public List<Object[]> getJobsByMonth();
+
+
+
 }

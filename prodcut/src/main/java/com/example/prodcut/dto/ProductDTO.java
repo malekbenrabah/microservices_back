@@ -23,7 +23,7 @@ public class ProductDTO {
 
     private Float price;
 
-    private String brand;
+    private Long brandId;
 
     private LocalDateTime created_at;
 
@@ -38,7 +38,7 @@ public class ProductDTO {
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())
-                .brand(product.getBrand())
+                .brandId(product.getBrandId())
                 .created_at(product.getCreated_at())
                 .photos(product.getPhotos())
                 .build();
@@ -53,7 +53,7 @@ public class ProductDTO {
                 .name(productDTO.getName())
                 .description(productDTO.getDescription())
                 .price(productDTO.getPrice())
-                .brand(productDTO.getBrand())
+                .brandId(productDTO.getBrandId())
                 .created_at(productDTO.getCreated_at())
                 .photos(productDTO.getPhotos())
                 .build();

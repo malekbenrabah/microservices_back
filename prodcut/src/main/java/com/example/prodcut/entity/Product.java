@@ -28,7 +28,7 @@ public class Product {
 
     private Float price;
 
-    private String brand;
+    private Long brandId;
 
     private LocalDateTime created_at;
 

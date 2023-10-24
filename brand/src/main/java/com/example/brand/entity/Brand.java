@@ -22,4 +22,7 @@ public class Brand {
     private Long id;
 
     private String name;
+
+    private String photo;
+
 }

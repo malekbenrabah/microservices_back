@@ -125,13 +125,14 @@ public class ProductService implements  IProductService{
 
     @Override
     public ProductDTO findProductById(Long id) {
+        System.out.println("find product by id begin");
         Product product = productRepository.findById(id).orElse(null);
         return ProductDTO.fromEntityToDTO(product);
 
     }
 
     @Override
-    public List<ProductDTO> searchProducts(String name, String description, String brand, Float maxPrice, Float minPrice) {
+    public List<ProductDTO> searchProducts(String name, String description, Long brand, Float maxPrice, Float minPrice) {
         System.out.println("begin search");
         List<Product> products = productRepository.findAll((Specification<Product>) (root, cq, cb) -> {
             Predicate p = cb.conjunction();
@@ -143,12 +144,9 @@ public class ProductService implements  IProductService{
                 p = cb.and(p, cb.like(root.get("description"), "%" + description + "%"));
             }
 
-            if (brand != null) {
-                p = cb.and(p, cb.like(root.get("brand"), "%" + brand + "%"));
+            if(brand!=null){
+                p=cb.and(p,cb.equal(root.get("brandId"),brand));
             }
-
-
-
 
             if (maxPrice != null) {
                 p = cb.and(p, cb.lessThanOrEqualTo(root.get("price"), maxPrice));
@@ -157,7 +155,6 @@ public class ProductService implements  IProductService{
             if (minPrice != null) {
                 p = cb.and(p, cb.greaterThanOrEqualTo(root.get("price"), minPrice));
             }
-
 
             cq.orderBy(cb.desc(root.get("created_at")));
             return p;
@@ -171,11 +168,12 @@ public class ProductService implements  IProductService{
 
     @Override
     public List<ProductDTO> similarProducts(Long id) {
+        System.out.println("similar product");
         List<Product> products=productRepository.findAll();
         Product product = productRepository.findById(id).get();
         List<Product> similarProducts= new ArrayList<>();
         for (Product p:products) {
-            if (product.getBrand().equals(p.getBrand()) && product.getId()!=p.getId()) {
+            if (product.getBrandId().equals(p.getBrandId()) && product.getId()!=p.getId()) {
                 similarProducts.add(p);
             }
         }
@@ -191,7 +189,7 @@ public class ProductService implements  IProductService{
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
-        product.setBrand(productDTO.getBrand());
+        product.setBrandId(productDTO.getBrandId());
         productRepository.save(product);
         return productDTO.fromEntityToDTO(product);
     }
@@ -228,12 +226,12 @@ public class ProductService implements  IProductService{
                 .findFirst()
                 .orElse(null);
 
-            existingPhotos.remove(photoToDelete);
-            // Delete the photo entity from the database
-            photoRepository.delete(photoToDelete);
-            product.setPhotos(existingPhotos);
-            productRepository.save(product);
-            return ProductDTO.fromEntityToDTO(product);
+        existingPhotos.remove(photoToDelete);
+        // Delete the photo entity from the database
+        photoRepository.delete(photoToDelete);
+        product.setPhotos(existingPhotos);
+        productRepository.save(product);
+        return ProductDTO.fromEntityToDTO(product);
 
 
 
@@ -243,5 +241,15 @@ public class ProductService implements  IProductService{
     public void deleteProduct(Long id) {
         Product product = productRepository.findById(id).get();
         productRepository.delete(product);
+    }
+
+    @Override
+    public List<Product> findAllProductsByBrand(Long id) {
+        return productRepository.findAllByBrandId(id);
+    }
+
+    @Override
+    public List<Object[]> getProductsByMonth() {
+        return productRepository.getJobsByMonth();
     }
 }
